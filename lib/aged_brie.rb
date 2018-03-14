@@ -1,16 +1,6 @@
-class AgedBrie
-  attr_accessor :name, :sell_in, :quality
+require 'gilded_rose'
 
-  def initialize(name, sell_in, quality)
-    @name = name
-    @sell_in = sell_in
-    @quality = quality
-  end
-
-  def to_s()
-    "#{@name}, #{@sell_in}, #{@quality}"
-  end
-
+class AgedBrie < Item
   def update_item(store)
     @quality += 1
     @sell_in -= 1

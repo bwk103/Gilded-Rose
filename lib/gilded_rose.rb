@@ -1,9 +1,3 @@
-require_relative 'aged_brie'
-require_relative 'backstage_passes'
-require_relative 'aged_brie'
-require_relative 'sulfuras'
-require_relative 'ordinary'
-
 class GildedRose
 
   MAX_QUALITY = 50
@@ -26,19 +20,18 @@ class GildedRose
   def checkMinQuality(item)
     item.quality = MIN_QUALITY if item.quality < MIN_QUALITY
   end
-
 end
 
-# class Item
-#   attr_accessor :name, :sell_in, :quality
-#
-#   def initialize(name, sell_in, quality)
-#     @name = name
-#     @sell_in = sell_in
-#     @quality = quality
-#   end
-#
-#   def to_s()
-#     "#{@name}, #{@sell_in}, #{@quality}"
-#   end
-# end
+class Item
+  attr_accessor :name, :sell_in, :quality
+
+  def initialize(name, sell_in, quality)
+    @name = name
+    @sell_in = sell_in
+    @quality = quality
+  end
+
+  def to_s()
+    "#{@name}, #{@sell_in}, #{@quality}"
+  end
+end

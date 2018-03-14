@@ -1,4 +1,8 @@
 require 'gilded_rose'
+require 'ordinary'
+require 'sulfuras'
+require 'aged_brie'
+require 'backstage_passes'
 
 describe GildedRose do
 
