@@ -5,8 +5,38 @@ describe GildedRose do
   let(:sulfuras) { Item.new('Sulfuras, Hand of Ragnaros', 0, 80) }
   let(:brie) { Item.new('Aged Brie', 10, 10) }
   let(:passes) { Item.new('Backstage passes to a TAFKAL80ETC concert', 15, 10) }
+  let(:ordinary) { Item.new('Ordinary item', 10, 10) }
 
   describe '#update_quality' do
+    describe 'ordinary items' do
+      before(:each) do
+        @items = [ordinary]
+        GildedRose.new(@items).update_quality()
+      end
+      describe "before sell by date" do
+        it "quality decreases by 1" do
+          expect(@items[0].quality).to be 9
+        end
+        it "sellIn decreases by 1" do
+          expect(@items[0].sell_in).to be 9
+        end
+      end
+
+      describe "after sell by date" do
+        before(:each) do
+          ordinary = Item.new('Ordinary item', 0, 10)
+          @items = [ordinary]
+          GildedRose.new(@items).update_quality()
+        end
+        it "quality decreases by 2" do
+          expect(@items[0].quality).to be 8
+        end
+        it "sellIn decreases by 1" do
+          expect(@items[0].sell_in).to be -1
+        end
+      end
+    end
+
     describe 'Sulfuras, Hand of Ragnaros' do
       before(:each) do
         @items = [sulfuras]
