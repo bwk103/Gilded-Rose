@@ -3,11 +3,11 @@ require 'gilded_rose'
 describe GildedRose do
 
   subject(:store) { described_class.new(items) }
-  let(:sulfuras) { Item.new('Sulfuras, Hand of Ragnaros', 0, 80) }
-  let(:brie) { Item.new('Aged Brie', 10, 10) }
-  let(:passes) { Item.new('Backstage passes to a TAFKAL80ETC concert', 15, 10) }
-  let(:valuable_passes) { Item.new('Backstage passes to a TAFKAL80ETC concert', 3, 50) }
-  let(:ordinary) { Item.new('Ordinary item', 5, 10) }
+  let(:sulfuras) { Sulfuras.new('Sulfuras, Hand of Ragnaros', 0, 80) }
+  let(:brie) { AgedBrie.new('Aged Brie', 10, 10) }
+  let(:passes) { BackstagePasses.new('Backstage passes to a TAFKAL80ETC concert', 15, 10) }
+  let(:valuable_passes) { BackstagePasses.new('Backstage passes to a TAFKAL80ETC concert', 3, 50) }
+  let(:ordinary) { Ordinary.new('Ordinary item', 5, 10) }
   let(:items) { [sulfuras, brie, passes, ordinary, valuable_passes] }
 
   before(:each) do
