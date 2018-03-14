@@ -3,6 +3,7 @@ require 'ordinary'
 require 'sulfuras'
 require 'aged_brie'
 require 'backstage_passes'
+require 'conjured'
 
 describe GildedRose do
 
@@ -12,7 +13,8 @@ describe GildedRose do
   let(:passes) { BackstagePasses.new('Backstage passes to a TAFKAL80ETC concert', 15, 10) }
   let(:valuable_passes) { BackstagePasses.new('Backstage passes to a TAFKAL80ETC concert', 3, 50) }
   let(:ordinary) { Ordinary.new('Ordinary item', 5, 10) }
-  let(:items) { [sulfuras, brie, passes, ordinary, valuable_passes] }
+  let(:conjured) { Conjured.new('Conjured Something', 10, 40) }
+  let(:items) { [sulfuras, brie, passes, ordinary, valuable_passes, conjured] }
 
   before(:each) do
     store.update_quality
@@ -122,6 +124,29 @@ describe GildedRose do
         it "sellIn decreases by 1" do
           expect(passes.sell_in).to be -1
         end
+      end
+    end
+  end
+
+  describe 'Conjured' do
+    describe "before sell by date" do
+      it "quality decreases by 2" do
+        expect(conjured.quality).to be 38
+      end
+      it "sellIn decreases by 1" do
+        expect(conjured.sell_in).to be 9
+      end
+    end
+
+    describe "after sell by date" do
+      before(:each) do
+        10.times { store.update_quality }
+      end
+      it "quality decreases by 4" do
+        expect(conjured.quality).to be 16
+      end
+      it "sellIn decreases by 1" do
+        expect(conjured.sell_in).to be -1
       end
     end
   end
