@@ -9,11 +9,19 @@ describe GildedRose do
 
   describe '#update_quality' do
     describe 'ordinary items' do
-      before(:each) do
+      it "quality cannot be negative" do
         @items = [ordinary]
-        GildedRose.new(@items).update_quality()
+        store = GildedRose.new(@items)
+        11.times { store.update_quality }
+        expect(@items[0].quality).to be 0
       end
+
       describe "before sell by date" do
+        before(:each) do
+          @items = [ordinary]
+          GildedRose.new(@items).update_quality()
+        end
+
         it "quality decreases by 1" do
           expect(@items[0].quality).to be 9
         end
@@ -28,9 +36,11 @@ describe GildedRose do
           @items = [ordinary]
           GildedRose.new(@items).update_quality()
         end
+
         it "quality decreases by 2" do
           expect(@items[0].quality).to be 8
         end
+
         it "sellIn decreases by 1" do
           expect(@items[0].sell_in).to be -1
         end
@@ -54,11 +64,19 @@ describe GildedRose do
     describe 'Aged Brie' do
       before(:each) do
         @items = [brie]
-        GildedRose.new(@items).update_quality()
+        @store = GildedRose.new(@items)
+        @store.update_quality
       end
+
       it 'quality increases by 1' do
         expect(@items[0].quality).to eq 11
       end
+
+      it 'quality cannot be more than 50' do
+        45.times { @store.update_quality }
+        expect(@items[0].quality).to be 50
+      end
+
       it 'sellIn decreases by 1' do
         expect(@items[0].sell_in).to eq 9
       end
@@ -69,6 +87,14 @@ describe GildedRose do
         @items = [passes]
         GildedRose.new(@items).update_quality()
       end
+
+      it 'quality cannot be more than 50' do
+        passes =  Item.new('Backstage passes to a TAFKAL80ETC concert', 3, 50)
+        @items = [passes]
+        GildedRose.new(@items).update_quality
+        expect(@items[0].quality).to be 50
+      end
+      
       describe "when more than 10 days before the concert" do
         it "quality increases by 1" do
           expect(@items[0].quality).to be 11
