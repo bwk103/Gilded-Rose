@@ -8,7 +8,7 @@ describe GildedRose do
   let(:passes) { Item.new('Backstage passes to a TAFKAL80ETC concert', 15, 10) }
   let(:valuable_passes) { Item.new('Backstage passes to a TAFKAL80ETC concert', 3, 50) }
   let(:ordinary) { Item.new('Ordinary item', 5, 10) }
-  let(:items) { [sulfuras, brie, passes, ordinary] }
+  let(:items) { [sulfuras, brie, passes, ordinary, valuable_passes] }
 
   before(:each) do
     store.update_quality
