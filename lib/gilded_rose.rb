@@ -15,39 +15,8 @@ class GildedRose
 
   def update_quality()
     @items.each do |item|
-      case item.name
-      when "Sulfuras, Hand of Ragnaros"
-        item
-      when "Aged Brie"
-        aged_brie(item)
-      when "Backstage passes to a TAFKAL80ETC concert"
-        backstage_passes(item)
-      else
-        original_item(item)
-      end
+      item.update_item(self)
     end
-  end
-
-  def original_item(item)
-    item.quality -= 1
-    item.sell_in -= 1
-    item.quality -= 1 if item.sell_in < 0
-    checkMinQuality(item)
-  end
-
-  def aged_brie(item)
-    item.quality += 1
-    item.sell_in -= 1
-    checkMaxQuality(item)
-  end
-
-  def backstage_passes(item)
-    item.quality += 1 if item.sell_in <= 5
-    item.quality += 1 if item.sell_in <= 10
-    item.quality += 1
-    item.sell_in -= 1
-    item.quality = 0 if item.sell_in <= 0
-    checkMaxQuality(item)
   end
 
   def checkMaxQuality(item)

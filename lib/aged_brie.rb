@@ -10,4 +10,10 @@ class AgedBrie
   def to_s()
     "#{@name}, #{@sell_in}, #{@quality}"
   end
+
+  def update_item(store)
+    @quality += 1
+    @sell_in -= 1
+    store.checkMaxQuality(self)
+  end
 end

@@ -10,4 +10,7 @@ class Sulfuras
   def to_s()
     "#{@name}, #{@sell_in}, #{@quality}"
   end
+
+  def update_item(store)
+  end
 end
